@@ -1,7 +1,39 @@
+" Software Design 2015/01 26page
+if has('vim_starting')
+    set nocompatible
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+
+call neobundle#begin(expand('~/.vim/bundle'))
+
+" neobundle.vim自身をneobundle.vimで管理する
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+
+" ヘルプの日本語化
+NeoBundle 'vim-jp/vimdoc-ja'
+" 現在開いているファイルをVim内で直接実行し、結果を表示。
+NeoBundle 'thinca/vim-quickrun'
+" カラースキーム 使っていない。
+NeoBundle 'junegunn/seoul256.vim'
+
+call neobundle#end()
+
+filetype plugin indent on
+
+" プラグインがインストールされているかチェック
+NeoBundleCheck
+
+if !has('vim_starting')
+    " .vimrcを読み込み直したときのための設定
+    call neobundle#call_hook('on_source')
+endif
+
+set helplang=ja,en
+
 set nocompatible        " Use Vim defaults (much better!)
 set bs=indent,eol,start         " allow backspacing over everything in insert mode
-"set ai                 " always set autoindenting on
-"set backup             " keep a backup file
+set backup             " keep a backup file
 set viminfo='20,\"50    " read/write a .viminfo file, don't store more
                         " than 50 lines of registers
 set history=50          " keep 50 lines of command line history
@@ -62,8 +94,6 @@ set fencs=iso-2022-jp,utf-8,euc-jp,cp932
 set tabstop=4
 " タブをスペースに展開しない (expandtab:展開する) 
 set noexpandtab
-" 行数表示
-set nu
 " ルーラーを表示 (noruler:非表示) 
 "set ruler
 set noruler
@@ -94,8 +124,7 @@ let format_allow_over_tw = 1    " ぶら下り可能幅
 set showcmd
 "---------------------------------------------------------
 " プラグインファイルの置き場所を追加する
-" http://nanasi.jp/articles/howto/config/runtimepath.html
-set runtimepath+=$HOME/.vim/runtime,$HOME/.vim/,$HOME/.vim,$HOME/.vim/runtime/syntax,$HOME/.vim/ftpplugin
+"
 " syntaxを追加する
 augroup filetypedetect
 au BufNewFile,BufRead *.as  setf actionscript
@@ -112,8 +141,9 @@ set showmatch
 " カラースキーマ
 "colorscheme desert
 
+
 " ウィンドウ上部のタブ部分を無効に
-"set guioptions-=T
+" set guioptions-=T
 
 " MacVim.appを起動時の設定
 if has("gui_running")
