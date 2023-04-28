@@ -9,13 +9,12 @@ call neobundle#begin(expand('~/.vim/bundle'))
 " neobundle.vim自身をneobundle.vimで管理する
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-
 " ヘルプの日本語化
 NeoBundle 'vim-jp/vimdoc-ja'
 " 現在開いているファイルをVim内で直接実行し、結果を表示。
 NeoBundle 'thinca/vim-quickrun'
 " カラースキーム 使っていない。
-NeoBundle 'junegunn/seoul256.vim'
+"NeoBundle 'junegunn/seoul256.vim'
 
 call neobundle#end()
 
@@ -92,8 +91,11 @@ set fencs=iso-2022-jp,utf-8,euc-jp,cp932
 "----------------------------------------------------------
 " タブの画面上での幅
 set tabstop=4
-" タブをスペースに展開しない (expandtab:展開する) 
-set noexpandtab
+" タブを挿入するときの幅
+set shiftwidth=4
+" タブをスペースに展開する (expandtab:展開する) 
+"set noexpandtab
+set expandtab
 " ルーラーを表示 (noruler:非表示) 
 "set ruler
 set noruler
@@ -146,20 +148,31 @@ set showmatch
 " set guioptions-=T
 
 " MacVim.appを起動時の設定
-if has("gui_running")
+"if has("gui_running")
 "  フルスクリーンモードする
 "  set fuoptions=maxvert,maxhorz
 "  au GUIEnter * set fullscreen
 "  IMを無効化
-  set imdisable
+"  set imdisable
 "  透明度を指定 0 - 100
-  set transparency=15
-else
+"  set transparency=15
+"else
 " Macターミナルのカラー設定
 " http://qiita.com/Humangas/items/848f0318dfc3c6f5b8e2
-  set background=dark
+"  set background=dark
 "  colorscheme solarized
-  let g:solarized_termcolors=256
-endif
-" syntax
-syntax enable
+"  let g:solarized_termcolors=256
+"endif
+" シンタックス
+"syntax enable
+"
+
+" Software Design 2017年10月号
+call plug#begin('~/.vim/plugged')
+" gina.vim の指定
+Plug 'lambdalisue/gina.vim'
+" 上記したプラグインの初期化処理
+call plug#end()
+" vimdiffで横分割を使う設定
+" Gina は diffoptの値で分割方向を決めるので、ここで指定する。
+"set diffopt+=vertical
